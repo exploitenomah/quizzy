@@ -1,0 +1,68 @@
+
+.fixed{
+  position:fixed;
+}
+.inset-0{
+  top: 0;
+  left:0;
+  right: 0;
+  bottom: 0;
+}
+.inset-y{
+  top: 0;
+  bottom: 0;
+}
+.left-0{
+  left: 0;
+}
+.right-0{
+  right: 0;
+}
+.h-screen{
+  height: 100vh;
+}
+.w-screen{
+  width: 100vw;
+}
+.flex{
+  display: flex;
+}
+.wrap{
+  flex-wrap: wrap;
+}
+.column{
+  flex-direction: column;
+}
+.justify-center{
+  justify-content: center;
+}
+.justify-between{
+  justify-content: space-betwween;
+}
+.justify-around{
+  justify-content: space-around;
+}
+.align-center{
+  align-items: center;
+}
+
+.m-auto{
+ margin: auto;
+}
+.mr-auto{
+  margin-right: auto;
+}
+.ml-auto{
+  margin-left: auto
+}
+.mx-auto{
+  margin-left: auto;
+  margin-right: auto
+}
+.my-0{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.md-max-width{
+  max-width: 56.25rem;
+}
