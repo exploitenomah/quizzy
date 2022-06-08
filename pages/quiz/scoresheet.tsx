@@ -1,11 +1,11 @@
 
 
 
-
+import { useRouter } from 'next/router'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import BgBox from '../../components/BgBox';
-import { useContext } from 'react'
+import { useEffect, useContext } from 'react'
 import QuizContext from '../../context/quizContext'
 import List from '@mui/material/List'
 import  { LinkConstructor,  LinkButton } from '../../components/Links'
@@ -13,11 +13,20 @@ import { BigPaperCard } from '../../components/Cards'
 import AnswerReview from '../../components/quiz/AnswerReview'
 
 const Results = () => {
+  const router = useRouter()
   const {
     questions,
     score,
     restoreDefault
   } = useContext(QuizContext)
+  useEffect(() => {
+    const lsQuestions = localStorage.getItem('questions')
+    const lsQuery = localStorage.getItem('query')
+    const lsSubmit = localStorage.getItem('submit')
+    const lsStart = localStorage.getItem('start')
+    if(lsQuestions === null && lsSubmit === null) router.push('/')
+    if(lsQuestions !== null && JSON.parse(lsQuestions).length < 1) router.push(`/`)
+  }, [router])
   const reset = () => restoreDefault()
   return (
     <BgBox  className='flex column justify-center align-center'>
