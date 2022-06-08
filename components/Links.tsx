@@ -1,7 +1,7 @@
 
 
 
-import NextLink from 'next/Link'
+import NextLink from 'next/link'
 import ListItem from '@mui/material/ListItem'
 import { SxProps } from '@mui/material'
 import Button from '@mui/material/Button';

@@ -1,7 +1,7 @@
 
 
 
-import NextLink from 'next/Link'
+import NextLink from 'next/link'
 import { Theme } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/ListItem'

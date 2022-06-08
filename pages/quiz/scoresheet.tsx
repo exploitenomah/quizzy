@@ -21,9 +21,7 @@ const Results = () => {
   } = useContext(QuizContext)
   useEffect(() => {
     const lsQuestions = localStorage.getItem('questions')
-    const lsQuery = localStorage.getItem('query')
     const lsSubmit = localStorage.getItem('submit')
-    const lsStart = localStorage.getItem('start')
     if(lsQuestions === null && lsSubmit === null) router.push('/')
     if(lsQuestions !== null && JSON.parse(lsQuestions).length < 1) router.push(`/`)
   }, [router])

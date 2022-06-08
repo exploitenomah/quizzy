@@ -1,6 +1,6 @@
 
 
-import NextLink from 'next/Link'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { Theme } from '@mui/material'
