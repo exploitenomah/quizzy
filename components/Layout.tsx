@@ -4,6 +4,7 @@ import { useState, ReactNode } from 'react'
 import Header from './Header'
 import Navigation from './Navigation'
 import Overlay from './TransparentOverlay';
+import BgBox from './BgBox';
 
 type layoutProps = {
   title: string,
@@ -18,7 +19,7 @@ const Layout = ({ title, children }: layoutProps) => {
     setNavShown(prev => val ? val : !prev)
   }
   return (
-    <>
+    <BgBox>
      <Head>
         <title>{title}</title>
         <meta 
@@ -30,7 +31,7 @@ const Layout = ({ title, children }: layoutProps) => {
       <Header navShown={navShown} toggleNav={toggleNavShown} />
       <Navigation navShown={navShown} closeNav={toggleNavShown} />
       {children}
-    </>
+    </BgBox>
   )
 }
 

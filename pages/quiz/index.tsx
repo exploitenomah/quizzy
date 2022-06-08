@@ -3,18 +3,23 @@
 
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import Layout from '../../components/Layout'
-import LevelSelect from '../../components/LevelSelect'
-import ConfirmQuizStart from '../../components/ConfirmQuizStart'
+import LevelSelect from '../../components/quiz/LevelSelect'
+import ConfirmQuizStart from '../../components/quiz/ConfirmQuizStart'
+import QuizTemplate from '../../components/quiz/QuizTemplate'
 import { useContext } from 'react'
 import QuizContext from '../../context/quizContext'
+import Paper from '@mui/material/Paper'
+import Box from '@mui/material/Box'
 
-
+const permits = ['easy', 'medium', 'hard']
 interface PrequizInterface {
   handleStartQuiz: Function
   handleSetDifficulty: Function,
   handleClearDifficulty: Function,
-  difficulty: string
+  difficulty: string,
+  limit: number,
 }
 
 const PreQuiz = ({
@@ -22,6 +27,7 @@ const PreQuiz = ({
   handleStartQuiz,
   handleSetDifficulty,
   handleClearDifficulty,
+  limit
 }: PrequizInterface) => {
   const { query } = useRouter()
   return (
@@ -34,6 +40,7 @@ const PreQuiz = ({
           />
           :
           <ConfirmQuizStart
+            limit={limit}
             handleStartQuiz={handleStartQuiz}
             difficulty={difficulty}
             handleClearDifficulty={handleClearDifficulty} />
@@ -41,41 +48,65 @@ const PreQuiz = ({
     </Layout>
   )
 }
-
+const Quiz = () => {
+  const { loading, error, questions} = useContext(QuizContext)
+  return (
+    <Paper
+    sx={(theme) => ({
+      background:`linear-gradient(-45deg,
+        ${theme.status.success}23 20%, ${theme.status.warning}16)`,
+      color:  theme.palette.secondary.main
+    })}
+    >
+      {error ?
+        <>Error...</> :
+        <>
+          {
+            (loading || questions.length <= 0) ?
+              <Box
+              className='flex justify-center align-center'
+              sx={{minHeight: '100vh', fontSize: '2.7rem'}}
+              >Loading</Box> :
+              <QuizTemplate  />
+          }
+        </>
+      }
+    </Paper>
+  )
+}
 const QuizPage: NextPage = () => {
-  const { quiz, start, timer, score,
-    difficulty, loading, error, handleStartQuiz,
-    handleSetDifficulty, handleClearDifficulty, } = useContext(QuizContext)
+  const { submit, limit,
+    difficulty, handleStartQuiz,
+    handleSetDifficulty, handleClearDifficulty,
+   } = useContext(QuizContext)
   const router = useRouter()
-
-  console.log(loading)
+  useEffect(() => {
+    if ((router.query.difficulty) && (router.query.start)) {
+      if (typeof (router.query.difficulty) === 'string' &&
+        permits.includes(router.query.difficulty)) {
+        handleStartQuiz(router.query.difficulty)
+      } else {
+        router.push('/')
+      }
+    }
+  }, [router, handleStartQuiz])
+  useEffect(() => {
+    submit && router.push('/quiz/result')
+  }, [router, submit])
   return (
     <>
-
-      {
-        !(router.query.start) ?
-          <PreQuiz
-            handleStartQuiz={handleStartQuiz}
-            handleSetDifficulty={handleSetDifficulty}
-            difficulty={difficulty}
-            handleClearDifficulty={handleClearDifficulty}
-          />
+    {
+        (router.query.start) ?
+          <Quiz />
           :
-          <>
-            {error ?
-              <>Error...</> :
-              <>
-                {
-                  loading === true ?
-                    <>Loading</> :
-                    <>
-                      Hello world
-                    </>
-                }
-              </>
-            }
-          </>
-      }
+          <PreQuiz
+          limit={limit}
+          handleStartQuiz={handleStartQuiz}
+          handleSetDifficulty={handleSetDifficulty}
+          difficulty={difficulty}
+          handleClearDifficulty={handleClearDifficulty}
+        />
+    }
     </>
   )
 }

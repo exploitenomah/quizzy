@@ -10,6 +10,8 @@ declare module '@mui/material' {
       warning: string,
       danger: string
       error: string,
+      primary?: string,
+      secondary?: string,
     }
   }
   interface ThemeOptions { 
@@ -19,6 +21,8 @@ declare module '@mui/material' {
       warning?: string,
       danger?: string
       error?: string,
+      primary?: string,
+      secondary?: string,
     }
   }
 }
@@ -51,15 +55,18 @@ const themeStyles = {
     h1Hero: {
       fontSize: 45,
       fontWeight: '100',
+      fontFamily: ['Roboto ', 'sans-serif']
     },
   },
   // spacing:{},
   status:{ 
-    success: green[500],
-    info: blue[500],
-    warning: orange[500],
-    danger: red[400],
-    error: red[500],
+    success: green[700],
+    info: blue[700],
+    warning: orange[700],
+    danger: red[700],
+    error: red[600], 
+    primary: '#fff',
+    secondary: ''
   },
   breakpoints:{},
   zIndex:{},

@@ -14,8 +14,6 @@ import QuizContext from '../context/quizContext'
 const navLinks = [
   { text: 'Home', path: '/' },
   { text: 'Quiz', path: '/quiz' },
-  { text: 'High Scores', path: '/highscores' },
-  { text: 'About', path: '/about' },
 ]
 
 const navigationStyles = (theme: Theme, navShown: boolean) => ({

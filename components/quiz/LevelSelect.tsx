@@ -1,6 +1,7 @@
 
 import  { useCallback } from 'react'
-import PreQuizTemplate, { LinkConstructor } from './PreQuizTemplate'
+import PreQuizTemplate from './PreQuizTemplate'
+import  { LinkConstructor } from '../Links'
 
 interface LevelSelectInterface {
   difficulty: string,

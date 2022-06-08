@@ -2,18 +2,21 @@
 
 import  { useCallback } from 'react'
 import Typography from '@mui/material/Typography'
-import PreQuizTemplate, { LinkConstructor } from './PreQuizTemplate'
+import PreQuizTemplate from './PreQuizTemplate'
+import  { LinkConstructor } from '../Links'
 
 
 interface ConfirmInterface {
   difficulty: string,
   handleStartQuiz: Function,
-  handleClearDifficulty: Function
+  handleClearDifficulty: Function,
+  limit: number
 }
 const ConfirmQuizStart = ({ 
   difficulty,
   handleStartQuiz,
   handleClearDifficulty,
+  limit,
  }: ConfirmInterface) => {
 
 
@@ -31,7 +34,7 @@ const ConfirmQuizStart = ({
       mb={0}
       align='center'
       component='p'
-      >You have selected the <b>{difficulty}</b> level and you have <b>{difficulty}</b> minutes to answer <b>{difficulty}</b> questions</Typography>
+      >You have selected the <b>{difficulty}</b> level to answer <b>{limit}</b> questions</Typography>
     </PreQuizTemplate>
     </>
   )
